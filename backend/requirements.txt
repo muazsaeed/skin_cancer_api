@@ -14,4 +14,4 @@ tqdm==4.66.1
 opencv-python==4.8.0.76
 requests==2.31.0
 python-dotenv==1.0.0
-typing-extensions==4.7.1 
+typing-extensions>=4.8.0 
