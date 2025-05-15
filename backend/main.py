@@ -58,12 +58,11 @@ async def model_check():
     """
     Check if the model files are available
     """
-    models_dir = os.path.abspath(os.path.join(current_dir, "../lib/model"))
+    models_dir = os.path.join(current_dir, "weights")
     efficient_path = os.path.join(models_dir, "AUROC0.5180_Loss0.6361_epoch47.bin")
     eva02_path = os.path.join(models_dir, "AUROC0.5185_Loss0.3027_epoch39.bin")
     
     if not os.path.exists(models_dir):
-        os.makedirs(os.path.dirname(models_dir), exist_ok=True)
         os.makedirs(models_dir, exist_ok=True)
         return JSONResponse(
             status_code=503,
@@ -107,7 +106,7 @@ async def predict_image(
             )
         
         # Check if models exist
-        models_dir = os.path.abspath(os.path.join(current_dir, "../lib/model"))
+        models_dir = os.path.join(current_dir, "weights")
         model_file = "AUROC0.5180_Loss0.6361_epoch47.bin" if model_type == "efficient_b" else "AUROC0.5185_Loss0.3027_epoch39.bin"
         model_path = os.path.join(models_dir, model_file)
         
@@ -115,7 +114,7 @@ async def predict_image(
             logger.error(f"Model file not found: {model_path}")
             raise HTTPException(
                 status_code=503,
-                detail=f"Model file not found. Please place '{model_file}' in the lib/model directory."
+                detail=f"Model file not found. Please place '{model_file}' in the backend/weights directory."
             )
         
         # Read image file content

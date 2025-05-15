@@ -15,16 +15,11 @@ COPY requirements.txt .
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Create directory for model weights
-RUN mkdir -p lib/model
-
-# Add a note about model files
-RUN echo "Please download model files and place them in lib/model/ directory:" > lib/model/README.txt && \
-    echo "- AUROC0.5180_Loss0.6361_epoch47.bin (EfficientNet-B0 weights)" >> lib/model/README.txt && \
-    echo "- AUROC0.5185_Loss0.3027_epoch39.bin (EVA-02 weights)" >> lib/model/README.txt
-
 # Copy application code
 COPY . .
+
+# Ensure weights directory exists (weights will be in the repository)
+RUN mkdir -p backend/weights
 
 # Set environment variables
 ENV PYTHONPATH=/app

@@ -37,6 +37,9 @@ ENV/
 *.onnx
 *.pt
 
+# Allow model weights in the backend/weights folder
+!backend/weights/*.bin
+
 # OS specific
 .DS_Store
 .DS_Store?

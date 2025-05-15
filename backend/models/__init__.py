@@ -18,12 +18,12 @@ def get_model(model_type, models_dir=None):
     Returns:
         Loaded model ready for inference
     """
-    # If model_dir is not provided, use a default relative to project root
+    # If model_dir is not provided, use a default relative to the backend directory
     if models_dir is None:
-        # Get the project root directory (assuming this file is in <root>/backend/models/__init__.py)
+        # Get the backend directory (assuming this file is in backend/models/__init__.py)
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        project_root = os.path.abspath(os.path.join(current_dir, "../.."))
-        models_dir = os.path.join(project_root, "lib/model")
+        backend_dir = os.path.abspath(os.path.join(current_dir, ".."))
+        models_dir = os.path.join(backend_dir, "weights")
     
     # Print model directory for debugging
     print(f"Looking for models in: {models_dir}")
